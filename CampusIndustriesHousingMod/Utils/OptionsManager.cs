@@ -9,8 +9,17 @@ namespace CampusIndustriesHousingMod.Utils
 {
     public class OptionsManager
     {
-        private static readonly string[] BARRACKS_INCOME_LABELS = ["Communisim is Key (Full Maintenance)", "Workers Families can Help a Little (Half Maintenance at Full Capacity)", "Make the Workers Families Pay (No Maintenance at Full Capacity)", "Workers Barracks should be Profitable (Maintenance becomes Profit at Full Capacity)", "Twice the Pain, Twice the Gain (2x Maintenance, 2x Profit)", "Show me the Money! (Profit x2, Normal Maintenance)"];
-        private static readonly string[] DORMS_INCOME_LABELS = ["Communisim is Key (Full Maintenance)", "Students can Help a Little (Half Maintenance at Full Capacity)", "Make the Students Pay (No Maintenance at Full Capacity)", "Students Dormitories should be Profitable (Maintenance becomes Profit at Full Capacity)", "Twice the Pain, Twice the Gain (2x Maintenance, 2x Profit)", "Show me the Money! (Profit x2, Normal Maintenance)"];
+        private static readonly string[] BARRACKS_INCOME_LABELS =
+        [
+            "全维护费用",
+            "满容量时维护费用减半",
+            "满容量时无维护费用",
+            "满容量时维护费用变为利润",
+            "维护费用和利润均为两倍",
+            "两倍利润，正常维护费用"
+        ];
+        private static readonly string[] DORMS_INCOME_LABELS = BARRACKS_INCOME_LABELS;
+
 
         public enum IncomeValues
         {
@@ -30,24 +39,26 @@ namespace CampusIndustriesHousingMod.Utils
         public void Initialize(UIHelperBase helper)
         {
             Logger.LogInfo(Logger.LOG_OPTIONS, "OptionsManager.Initialize -- Initializing Menu Options");
-            UIHelperBase group = helper.AddGroup("Housing Global Settings");
-            barracksIncomeDropDown = (UIDropDown)group.AddDropdown("Barracks Income Modifier", BARRACKS_INCOME_LABELS, 2, HandleIncomeChange);
+            UIHelperBase group = helper.AddGroup("住房全局设置");
+            barracksIncomeDropDown = (UIDropDown)group.AddDropdown("工人宿舍收入预设", BARRACKS_INCOME_LABELS, 2, HandleIncomeChange);
+            barracksIncomeDropDown.width = 350f;
             group.AddSpace(2);
-            dormsIncomeDropDown = (UIDropDown)group.AddDropdown("Dorms Income Modifier", DORMS_INCOME_LABELS, 2, HandleIncomeChange);
+            dormsIncomeDropDown = (UIDropDown)group.AddDropdown("学生宿舍收入预设", DORMS_INCOME_LABELS, 2, HandleIncomeChange);
+            dormsIncomeDropDown.width = 350f;
             group.AddSpace(5);
-            group.AddButton("Save", SaveOptions);
+            group.AddButton("保存", SaveOptions);
 
-            UIHelperBase group_clear = helper.AddGroup("Housing Clear Settings, Use with Caution!! Can't be undone!");
-            group_clear.AddButton("Clear All Buildings Records", ConfimDeleteBuildignRecords);
+            UIHelperBase group_clear = helper.AddGroup("清除设置相关 —— 谨慎使用，无法撤销！");
+            group_clear.AddButton("清除所有建筑设置", ConfimDeleteBuildignRecords);
             group_clear.AddSpace(1);
-            group_clear.AddButton("Clear All Buildings Prefab Records", ConfimDeletePrefabRecords);
+            group_clear.AddButton("清除所有类型设置", ConfimDeletePrefabRecords);
             group_clear.AddSpace(1);
-            group_clear.AddButton("Clear Housing Global Settings", ConfimDeleteGlobalConfig);
+            group_clear.AddButton("清除所有全局设置", ConfimDeleteGlobalConfig);
         }
 
         private void ConfimDeleteBuildignRecords()
         {
-            ConfirmPanel.ShowModal("Delete All Building Records", "This will clear all building records!", (comp, ret) =>
+            ConfirmPanel.ShowModal("清除所有建筑设置", "是否清除所有建筑设置？", (comp, ret) =>
             {
                 if (ret != 1)
                     return;
@@ -57,7 +68,7 @@ namespace CampusIndustriesHousingMod.Utils
 
         private void ConfimDeletePrefabRecords()
         {
-            ConfirmPanel.ShowModal("Delete All Prefab Records", "This will clear all prefab records!", (comp, ret) =>
+            ConfirmPanel.ShowModal("清除所有建筑类型设置", "是否清除所有建筑类型设置？", (comp, ret) =>
             {
                 if (ret != 1)
                     return;
@@ -67,7 +78,7 @@ namespace CampusIndustriesHousingMod.Utils
 
         private void ConfimDeleteGlobalConfig()
         {
-            ConfirmPanel.ShowModal("Delete All Global Settings", "This will clear all global settings!", (comp, ret) =>
+            ConfirmPanel.ShowModal("清除所有全局设置", "是否清除所有全局设置？", (comp, ret) =>
             {
                 if (ret != 1)
                     return;

@@ -401,9 +401,9 @@ namespace CampusIndustriesHousingMod.AI
 			{
 				stringBuilder.Append(Environment.NewLine);
 			}
-            stringBuilder.Append(string.Format("Apartments Occupied: {0} of {1}", numApartmentsOccupied, GetModifiedCapacity(buildingID)));
+            stringBuilder.Append(string.Format("已入住房间：{0}/{1}", numApartmentsOccupied, GetModifiedCapacity(buildingID)));
             stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append(string.Format("Number of Residents: {0}", numResidents));
+            stringBuilder.Append(string.Format("住户数：{0}", numResidents));
             stringBuilder.Append(Environment.NewLine);
             stringBuilder.Append(Environment.NewLine);
             return stringBuilder.ToString();

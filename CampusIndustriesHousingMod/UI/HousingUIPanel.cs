@@ -40,11 +40,11 @@ namespace CampusIndustriesHousingMod.UI
             m_uiMainPanel.height = 350f;
             m_uiMainPanel.width = 510f;
 
-            m_settingsCheckBox = UiUtils.CreateCheckBox(uIPanel, "SettingsCheckBox", "settings", HousingConfig.Config.ShowPanel);
+            m_settingsCheckBox = UiUtils.CreateCheckBox(uIPanel, "SettingsCheckBox", "设置", HousingConfig.Config.ShowPanel);
             m_settingsCheckBox.width = 80f;
             m_settingsCheckBox.label.textColor = new Color32(185, 221, 254, 255);
             m_settingsCheckBox.label.textScale = 0.8125f;
-            m_settingsCheckBox.tooltip = "Set the number of apartments to the dorms or the industry housing";
+            m_settingsCheckBox.tooltip = "设置宿舍的房间数";
             m_settingsCheckBox.AlignTo(buildingWorldInfoPanel.component, UIAlignAnchor.TopLeft);
             m_settingsCheckBox.relativePosition = new Vector3(400f, 0f);
             m_settingsCheckBox.eventCheckChanged += (component, value) =>
@@ -66,45 +66,45 @@ namespace CampusIndustriesHousingMod.UI
             };
             uIPanel.AttachUIComponent(m_settingsCheckBox.gameObject);
 
-            m_settingsHeader = UiUtils.CreateLabel(m_uiMainPanel, "SettingsPanelHeader", "Adjust Number of Apartments", "");
+            m_settingsHeader = UiUtils.CreateLabel(m_uiMainPanel, "SettingsPanelHeader", "调节房间数", "");
             m_settingsHeader.font = UiUtils.GetUIFont("OpenSans-Regular");
             m_settingsHeader.textAlignment = UIHorizontalAlignment.Center;
             m_settingsHeader.textColor = new Color32(78, 184, 126, 255);
-            m_settingsHeader.relativePosition = new Vector3(100f, 20f);
+            m_settingsHeader.relativePosition = new Vector3(200f, 20f);
             m_settingsHeader.textScale = 1.2f;
 
             m_settingsStatus = UiUtils.CreateLabel(m_uiMainPanel, "SettingsStatus", "", "");
             m_settingsStatus.font = UiUtils.GetUIFont("OpenSans-Regular");
             m_settingsStatus.textAlignment = UIHorizontalAlignment.Center;
             m_settingsStatus.textColor = new Color32(240, 190, 199, 255);
-            m_settingsStatus.relativePosition = new Vector3(110f, 95f);
+            m_settingsStatus.relativePosition = new Vector3(180f, 95f);
             m_settingsStatus.textScale = 0.9f;
 
-            ApartmentNumberPanel = UiUtils.UIServiceBar(m_uiMainPanel, "ApartmentNumber", "", "Number of apartments: ", "number of apartments");
+            ApartmentNumberPanel = UiUtils.UIServiceBar(m_uiMainPanel, "ApartmentNumber", "", "房间数: ", "房间数");
             ApartmentNumberPanel.relativePosition = new Vector3(10f, 130f);
 
-            SaveBuildingSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 190f, "SaveBuildingSettings", "Save building settings", "First priority - will override prefab and global settings create a record for this building");
+            SaveBuildingSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 190f, "SaveBuildingSettings", "保存建筑设置", "优先级最高 —— 将覆盖类型和全局设置，为此建筑创建特定设置");
             SaveBuildingSettingsBtn.eventClicked += SaveBuildingSettings;
 
-            ReturnToDefaultBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 190f, "ReturnToDefault", "Back to default", "Will not delete the record just set a default flag on it - you need to clear settings for this building to get the prefab or global settings");
+            ReturnToDefaultBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 190f, "ReturnToDefault", "重置回默认", "不会删除记录，只是为其设置默认标志，你需要清除此建筑的设置才能使用类型或全局设置");
             ReturnToDefaultBtn.eventClicked += ReturnToDefault;
 
-            ApplyPrefabSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 240f, "ApplyPrefabSettings", "Apply type settings", "Apply settings for all buildings of the same type as this building - is not cross save!");
+            ApplyPrefabSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 240f, "ApplyPrefabSettings", "应用类型设置", "将设置应用到与此建筑相同类型的所有建筑 —— 仅此存档");
             ApplyPrefabSettingsBtn.eventClicked += ApplyPrefabSettings;
 
-            ApplyGlobalSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 290f, "ApplyGlobalSettings", "Apply global settings", "Apply settings for all buildings of the same type as this building - is cross save!");
+            ApplyGlobalSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 260f, 290f, "ApplyGlobalSettings", "应用全局设置", "将设置应用到与此建筑相同类型的所有建筑 —— 跨存档");
             ApplyGlobalSettingsBtn.eventClicked += ApplyGlobalSettings;
                 
-            SetPrefabSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 240f, "SetPrefabSettings", "Set new type", "This will update all building records of this type to the current number of apartments in this save");
+            SetPrefabSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 240f, "SetPrefabSettings", "设置新类型", "这将更新此存档中所有此类型建筑的当前房间数量");
             SetPrefabSettingsBtn.eventClicked += SetPrefabSettings;
 
-            SetGlobalSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 290f, "SetGlobalSettings", "Set new global", "This will update all building records of this type to the current number of apartments across all saves");
+            SetGlobalSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 290f, "SetGlobalSettings", "设置新全局", "这将更新所有存档中此类型建筑的当前房间数量");
             SetGlobalSettingsBtn.eventClicked += SetGlobalSettings;
 
-            UnlockSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 130f, 55f, "UnlockSettingsBtn", "Unlock Settings", "");
+            UnlockSettingsBtn = UiUtils.AddButton(m_uiMainPanel, 130f, 55f, "UnlockSettingsBtn", "解锁设置", "");
             UnlockSettingsBtn.eventClicked += UnlockSettings;
 
-            LockUnlockChangesBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 55f, "LockUnLockChanges", "", "If Locked - type and global settings has no affect on this building", 32, 32);
+            LockUnlockChangesBtn = UiUtils.AddButton(m_uiMainPanel, 10f, 55f, "LockUnLockChanges", "", "如果锁定，类型和全局设置对该建筑没有影响", 32, 32);
 
             LockUnlockChangesBtn.atlas = TextureUtils.GetAtlas("LockButtonAtlas");
             LockUnlockChangesBtn.normalFgSprite = "UnLock";
@@ -127,7 +127,7 @@ namespace CampusIndustriesHousingMod.UI
         {
             SaveBuildingSettingsBtn.Enable();
             ReturnToDefaultBtn.Enable();
-
+                
             ushort buildingID = WorldInfoPanel.GetCurrentInstanceID().Building;
             Building building = Singleton<BuildingManager>.instance.m_buildings.m_buffer[buildingID];
 
@@ -182,18 +182,18 @@ namespace CampusIndustriesHousingMod.UI
 
             if (!buildingRecord.IsPrefab && !buildingRecord.IsGlobal)
             {
-                m_settingsStatus.text = buildingRecord.IsDefault ? "This Building is using default settings" : "This Building is using his own settings";
+                m_settingsStatus.text = buildingRecord.IsDefault ? "此建筑使用默认设置" : "此建筑使用自身设置";
                 m_apartmentsNumTextfield.text = buildingRecord.NumOfApartments.ToString();
             }
             else if (HousingManager.PrefabExist(building.Info.name, building.Info.GetAI().GetType().Name) && buildingRecord.IsPrefab && !buildingRecord.IsLocked)
             {
-                m_settingsStatus.text = "This Building is using type settings";
+                m_settingsStatus.text = "此建筑使用类型设置";
                 var prefabRecord = HousingManager.GetPrefab(building.Info);
                 m_apartmentsNumTextfield.text = prefabRecord.NumOfApartments.ToString();
             }
             else if(globalRecord != null && buildingRecord.IsGlobal && !buildingRecord.IsLocked)
             {
-                m_settingsStatus.text = "This Building is using global settings";
+                m_settingsStatus.text = "此建筑使用全局设置";
                 m_apartmentsNumTextfield.text = globalRecord.NumOfApartments.ToString();
             }
 
@@ -316,7 +316,7 @@ namespace CampusIndustriesHousingMod.UI
 
         public void SetPrefabSettings(UIComponent c, UIMouseEventParameter eventParameter)
         {
-            ConfirmPanel.ShowModal("Set Type Settings", "This will update all building records of this type to the current number of apartments in this save!", (comp, ret) =>
+            ConfirmPanel.ShowModal("设置类型", "是否更新此存档中所有此类型建筑的当前房间数量？", (comp, ret) =>
             {
                 if (ret != 1)
                 {
@@ -341,7 +341,7 @@ namespace CampusIndustriesHousingMod.UI
 
         public void SetGlobalSettings(UIComponent c, UIMouseEventParameter eventParameter)
         {
-            ConfirmPanel.ShowModal("Set Global Settings", "This will update all building records of this type to the current number of apartments across all saves!", (comp, ret) =>
+                ConfirmPanel.ShowModal("设置全局", "是否更新所有存档中此类型建筑的当前房间数量？", (comp, ret) =>
             {
                 if (ret != 1)
                 {

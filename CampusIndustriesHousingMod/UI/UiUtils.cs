@@ -171,7 +171,7 @@ namespace CampusIndustriesHousingMod.UI
             // value
             var text_name = name + "TextField";
             UITextField m_uiValueLabel = CreateTextField(m_uiPanel, text_name, tooltip);
-            m_uiValueLabel.relativePosition = new Vector3(180f, 1f);
+            m_uiValueLabel.relativePosition = new Vector3(60f, 0f);
 
             return m_uiPanel;
         }

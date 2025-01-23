@@ -16,10 +16,9 @@ namespace CampusIndustriesHousingMod
         public new IManagers managers { get; }
 
         private static Mod instance;
-        string IUserMod.Name => "Campus Industries Housing Mod";
+        string IUserMod.Name => "Campus Industries Housing Mod 汉化版";
+        string IUserMod.Description => "将工人与学生宿舍转变为实际的居住空间，同时保留它们本身的功能";
 
-        string IUserMod.Description => "Turn the Dorms and Barracks to actual living spaces apart from their other functions";
-        
         public void OnEnabled() 
         {
             HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
